@@ -1,1 +1,95 @@
+// index.html file
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>
+
+
+//Home.jsp file
+
+<%-- 
+    Document   : Home
+    Created on : Nov 24, 2021, 11:42:56 PM
+    Author     : Bunny
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <form  action="data.jsp" method="Get">
+            ID: <input type="text" name="EID">
+            <br/>
+            Name: <input type="text" name="Ename">
+            <br/>
+            Address: <input type="text" name="EAddress">
+            <br/>
+            <input type="submit" value="submit"/>
+            
+</body>
+</html>
+
+
+//data.jsp file
+
+<%-- 
+    Document   : data
+    Created on : Nov 24, 2021, 11:53:02 PM
+    Author     : Bunny
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%@page import= "java.sql.*, java.util.*" %>
+        <%
+        String Eid=request.getParameter("EID");
+        String Ename=request.getParameter("Ename");
+        String Address=request.getParameter("EAddress");   
+        
+        try
+        {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/scdwebsiteapp","root","");
+        Statement st = conn.createStatement();
+        int i = st.executeUpdate("insert into scdwebtable values('"+Eid+"','"+Ename+"','"+Address+"')");
+        
+        out.println("Data inserted Successfully");
+        
+        }
+        catch(Exception e)
+{
+System.out.print(e);
+e.printStackTrace();
+}
+ 
+        %>
+        
+        
+        
+    </body>
+</html>
+
 
